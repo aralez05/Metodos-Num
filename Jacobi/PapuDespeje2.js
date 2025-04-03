@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Evento al hacer clic en el botón "Descomponer"
     $("#descomponer").click(function () {
         let papu = false;
         let vueltapapu = 0;
@@ -35,7 +34,6 @@ $(document).ready(function () {
                         }
 
                     }
-
 
                     let terminoExponenteBajo = encontrarExponenteMasBajo(terminos);
                     switch (vueltapapu) {
@@ -93,7 +91,6 @@ $(document).ready(function () {
 
         }
     }
-    // Evento al hacer clic en el botón "Despejar x"
     $("#despejar").click(function () {
         let papu = false;
         let vueltapapu = 0;
@@ -136,7 +133,6 @@ $(document).ready(function () {
         }
     });
 
-    // Función para encontrar el término con el exponente más bajo de x
     function encontrarExponenteMasBajo(terminos) {
         let exponenteMasBajo = Infinity;
         let terminoMasBajo = "";
@@ -176,14 +172,12 @@ $(document).ready(function () {
             console.error(`Error: La ecuación no tiene un formato válido (falta '='). Entrada: ${funcion}`);
             return "Error: La ecuación debe contener un '='.";
         }
-        
     
-        let ladoIzq = lados[0] || ""; // Asegura que no sea undefined
-        let ladoDer = lados[1] || ""; // Asegura que no sea undefined
+        let ladoIzq = lados[0] || "";
+        let ladoDer = lados[1] || ""; 
     
-        console.log(`Lado izquierdo: ${ladoIzq}, Lado derecho: ${ladoDer}`); // Para depuración
+        console.log(`Lado izquierdo: ${ladoIzq}, Lado derecho: ${ladoDer}`); 
     
-        // Extraer términos con variables
         let terminos = ladoIzq.match(/[-+]?\d*\.?\d*[a-z]\^?\d*|[-+]?\d*\.?\d+/g) || [];
     
         if (!terminos || terminos.length === 0) {
@@ -191,16 +185,15 @@ $(document).ready(function () {
             return "Error: No se encontraron variables en la ecuación.";
         }
     
-        console.log(`Términos encontrados: ${terminos}`); // Para depuración
+        console.log(`Términos encontrados: ${terminos}`); 
     
-        // Verificar que tenemos suficientes términos para el orden
         if (terminos.length <= orden) {
             console.error(`Error: No hay suficientes términos en la ecuación para despejar (se esperaba el término ${orden + 1}).`);
             return `No se encontró suficiente cantidad de variables para despejar en la ecuación ${orden + 1}`;
         }
     
         let terminoObjetivo = terminos[orden];
-        console.log(`Término a despejar: ${terminoObjetivo}`); // Para depuración
+        console.log(`Término a despejar: ${terminoObjetivo}`);
     
         if (!terminoObjetivo) {
             console.error("Error: término objetivo es undefined");
@@ -219,107 +212,108 @@ $(document).ready(function () {
     
     
 
+
+
+
     function despejarVariable(funcion, variable) {
+        if (!funcion || typeof funcion !== "string") {
+            return "Error: La ecuación no es válida.";
+        }
+
+        funcion = funcion.replace(/\s+/g, "").toLowerCase();
         let lados = funcion.split("=");
-        let ladoIzq = lados[0];
-        let ladoDer = lados[1];
-    
-        let terminos = ladoIzq.match(/[-+]?\d*\.?\d*[a-z]\^?\d*|[-+]?\d*\.?\d+|sqrt\([^)]+\)/g) || [];
-        let terminoSeleccionado = terminos.find(t => t.includes(variable));
-    
-        if (!terminoSeleccionado) {
-            return `No se encontró la variable ${variable} para despejar.`;
-        }
-    
-        // Manejo de raíces cuadradas
-        if (terminoSeleccionado.includes("sqrt(")) {
-            let dentroRaiz = terminoSeleccionado.match(/sqrt\(([^)]+)\)/);
-            if (dentroRaiz) {
-                let contenidoRaiz = dentroRaiz[1];
-                let coeficiente = terminoSeleccionado.replace(/sqrt\([^)]+\)/, "");
-                coeficiente = coeficiente === "" || coeficiente === "+" ? "1" : coeficiente === "-" ? "-1" : coeficiente;
-    
-                // Mover otros términos al lado derecho
-                let ladoDerNuevo = terminos.filter(t => t !== terminoSeleccionado).map(t => {
-                    return t.startsWith("-") ? t.slice(1) : `-${t}`;
-                });
-    
-                if (ladoDer) {
-                    if (!ladoDer.startsWith("-") && !ladoDer.startsWith("+")) {
-                        ladoDerNuevo.push(`+${ladoDer}`);
-                    } else {
-                        ladoDerNuevo.push(ladoDer);
-                    }
-                }
-    
-                ladoDerNuevo = ladoDerNuevo.join(" ");
-                ladoDerNuevo = simplificarEcuacion(ladoDerNuevo);
-    
-                return `${variable} = ((${ladoDerNuevo}) / ${coeficiente})^2`;
-            }
-        }
-    
-        // Manejo de exponentes (como x^2)
-        let exponenteMatch = terminoSeleccionado.match(/\^(\d+)/);
-        if (exponenteMatch) {
-            let exponente = parseInt(exponenteMatch[1]);
-            let coeficiente = terminoSeleccionado.replace(new RegExp(`${variable}\\^?\\d*`), "");
-            coeficiente = coeficiente === "" || coeficiente === "+" ? "1" : coeficiente === "-" ? "-1" : coeficiente;
-    
-            // Mover otros términos al lado derecho
-            let ladoDerNuevo = terminos.filter(t => t !== terminoSeleccionado).map(t => {
-                return t.startsWith("-") ? t.slice(1) : `-${t}`;
-            });
-    
-            if (ladoDer) {
-                if (!ladoDer.startsWith("-") && !ladoDer.startsWith("+")) {
-                    ladoDerNuevo.push(`+${ladoDer}`);
-                } else {
-                    ladoDerNuevo.push(ladoDer);
-                }
-            }
-    
-            ladoDerNuevo = ladoDerNuevo.join(" ");
-            ladoDerNuevo = simplificarEcuacion(ladoDerNuevo);
-    
-            // Aplicar la raíz correspondiente al exponente
-            if (exponente === 2) {
-                return `${variable} = sqrt((${ladoDerNuevo}) / ${coeficiente})`;
-            } else {
-                return `${variable} = ((${ladoDerNuevo}) / ${coeficiente})^(1/${exponente})`;
-            }
-        }
-    
-        let coeficiente = terminoSeleccionado.replace(new RegExp(`${variable}\\^?\\d*`), "");
-        coeficiente = coeficiente === "" || coeficiente === "+" ? "1" : coeficiente === "-" ? "-1" : coeficiente;
+        if (lados.length !== 2) return "Error: La ecuación debe contener un '='.";
 
-        let ladoDerNuevo = terminos.filter(t => t !== terminoSeleccionado).map(t => {
-            return t.startsWith("-") ? t.slice(1) : `-${t}`;
-        });
+        let ladoIzq = lados[0] || "";
+        let ladoDer = lados[1] || "0";
 
-        if (ladoDer) {
-            if (!ladoDer.startsWith("-") && !ladoDer.startsWith("+")) {
-                ladoDerNuevo.push(`+${ladoDer}`);
-            } else {
-                ladoDerNuevo.push(ladoDer);
-            }
+        
+        let terminos = ladoIzq.match(/([-+]?\d*\.?\d*[a-z]\^?\d*|[-+]?\d*\.?\d+)/g) || [];
+        let terminoVar = terminos.find(t => t.includes(variable));
+        if (!terminoVar) return `La variable ${variable} no se encuentra en la ecuación.`;
+
+        let coeficiente = terminoVar.replace(new RegExp(`${variable}\\^?\\d*`, 'g'), '');
+        if (coeficiente === '' || coeficiente === '+') coeficiente = '1';
+        else if (coeficiente === '-') coeficiente = '-1';
+
+        let nuevosTerminos = terminos.filter(t => t !== terminoVar)
+                                   .map(t => t.startsWith('-') ? `+${t.substring(1)}` : `-${t}`);
+
+        if (ladoDer !== "0") {
+            nuevosTerminos.push(ladoDer.startsWith('-') ? ladoDer : `+${ladoDer}`);
         }
 
-        if (ladoDerNuevo.length === 0) {
-            return `No se puede despejar ${variable} (no hay términos para mover)`;
+        let nuevoLadoDer = nuevosTerminos.join('')
+                           .replace(/\+\+/g, '+')
+                           .replace(/\-\-/g, '+')
+                           .replace(/\+\-/g, '-')
+                           .replace(/\-\+/g, '-');
+
+        if (coeficiente !== '1' && coeficiente !== '-1') {
+            nuevoLadoDer = `(${nuevoLadoDer})/${coeficiente}`;
+        } else if (coeficiente === '-1') {
+            nuevoLadoDer = nuevoLadoDer.replace(/([+-]?)([^+-]+)/g, 
+                (_, signo, term) => (signo === '+' ? '-' : '+') + term);
         }
 
-        ladoDerNuevo = ladoDerNuevo.join(" ");
-        ladoDerNuevo = simplificarEcuacion(ladoDerNuevo);
+        nuevoLadoDer = simplificarEcuacion(nuevoLadoDer.replace(/^\+/, ''));
 
-        return `${variable} = (${ladoDerNuevo}) / ${coeficiente}`;
+        return `${variable} = ${nuevoLadoDer}`;
     }
     
-
+    function simplificarParentesis(expresion) {
+        if (expresion.startsWith('(') && expresion.endsWith(')')) {
+            let contenido = expresion.slice(1, -1);
+            if (!contenido.match(/[+\-]/)) {
+                return contenido;
+            }
+        }
+        return expresion;
+    }
+    
+    function simplificarExpresion(exp) {
+        exp = exp.replace(/^\((.*)\)$/, "$1");
+        exp = exp.replace(/([+-])\+/g, "$1")
+                 .replace(/([+-])\-/g, function(m, signo) {
+                     return signo === "+" ? "-" : "+";
+                 });
+        return exp;
+    }
+    
+    function encontrarExponenteMasBajo(terminos) {
+        let exponenteMasBajo = Infinity;
+        let terminoMasBajo = "";
+    
+        terminos.forEach(termino => {
+            let exponente = extraerExponente(termino);
+            if (exponente > 0 && exponente < exponenteMasBajo) {
+                exponenteMasBajo = exponente;
+                terminoMasBajo = termino;
+            }
+        });
+    
+        return terminoMasBajo;
+    }
+    
+    function extraerExponente(termino) {
+        if (!termino.includes("x")) return 0;
+        if (!termino.includes("^")) return 1;
+        let regex = /\^(\d+)/;
+        let match = termino.match(regex);
+        return match ? parseInt(match[1]) : 1;
+    }
+    
     function simplificarEcuacion(ecuacion) {
-        ecuacion = ecuacion.replace(/\(([^()]+)\)/g, "$1");
-        ecuacion = ecuacion.replace(/--/g, "+").replace(/\+-/g, "-").replace(/-\+/g, "-");
-        ecuacion = ecuacion.replace(/\+\+/g, "+");
+        if (ecuacion.startsWith('-(') && ecuacion.endsWith(')')) {
+            ecuacion = ecuacion.slice(2, -1).replace(/([+-])/g, m => m === '+' ? '-' : '+');
+        }
+        
+        ecuacion = ecuacion.replace(/\+\+/g, '+')
+                          .replace(/\+\-/g, '-')
+                          .replace(/\-\+/g, '-')
+                          .replace(/\-\-/g, '+')
+                          .replace(/([+-])1([a-z])/g, '$1$2');
+        
         return ecuacion;
     }
 });
