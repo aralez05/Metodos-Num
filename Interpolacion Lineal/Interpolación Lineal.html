@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Interpolación Lineal</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="interpolaciones.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+    textarea, input, button {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border-radius: 5px; border: 1px solid #ccc;
+    }
+    #resultado {
+      background: #fff; padding: 15px;
+      border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    canvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #dfdfdf;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+  </style>
+</head>
+<body>
+
+  <h2>Interpolación Lineal con Gráfica</h2>
+
+  <label>Valores de <strong>x</strong> (separados por comas):</label>
+  <textarea id="valoresX" placeholder="Ejemplo: 1, 2"></textarea>
+
+  <label>Valores de <strong>f(x)</strong> (separados por comas):</label>
+  <textarea id="valoresFX" placeholder="Ejemplo: 3, 5"></textarea>
+
+  <label>Valor de <strong>x</strong> a interpolar:</label>
+  <input type="number" id="xInterpola" placeholder="Ejemplo: 1.5">
+
+  <button id="calcular">Calcular Interpolación</button>
+
+  <div id="resultado"></div>
+
+  <canvas id="grafica" width="400" height="300"></canvas>
+
+</body>
+</html>
