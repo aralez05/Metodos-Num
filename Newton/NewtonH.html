@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpolación de Newton</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="NewtonJ.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .input-section, .result-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input {
+            padding: 6px;
+            width: 80px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #chart {
+            width: 100%;
+            height: 400px;
+        }
+        .point-input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interpolación de Newton</h1>
+    
+    <div class="container">
+        <div class="input-section">
+            <h2>Ingreso de Puntos</h2>
+            <div id="points-container">
+                <div class="point-input">
+                    <input type="number" class="x-input" placeholder="x" step="any">
+                    <input type="number" class="y-input" placeholder="y" step="any">
+                    <button class="remove-btn">×</button>
+                </div>
+            </div>
+            <button id="add-point">Agregar Punto</button>
+            <button id="calculate">Calcular Interpolación</button>
+            
+            <div>
+                <h3>Valor a interpolar (x):</h3>
+                <input type="number" id="interpolate-x" placeholder="Ingrese x" step="any">
+                <button id="interpolate-btn">Calcular y</button>
+                <p id="interpolation-result"></p>
+            </div>
+        </div>
+        
+        <div class="result-section">
+            <h2>Resultados</h2>
+            <div id="differences-table"></div>
+            <div id="polynomial"></div>
+            <div id="chart"></div>
+        </div>
+    </div>
+
+    <script src="newton.js"></script>
+</body>
+</html>
