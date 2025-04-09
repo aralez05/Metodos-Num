@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Interpolación Lineal</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="interpolaciones.js"></script>
+  <style>
+    body { 
+      font-family: monospace; padding: 20px; background: #b3e0e4;font-size: 18px;
+     }
+    textarea, input {
+      width: 90%; padding: 20px; margin: 10px 0;
+      border-radius: 5px; border: 2px solid #ccc;
+      align-items: center;
+    }
+    button{
+      width: 30%; padding: 20px; margin:20px 0;
+      border-radius: 5px; border: 2px solid #ccc;
+      align-items: center;
+    }
+    #resultado {
+      background: #fff; padding: 15px; width: 90%;
+      border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .grafico-con-tabla {
+      display: flex;
+      gap: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    canvas {
+      border: 1px solid #aaa;
+      background-color: #fff;
+    }
+    table {
+      background: #fff;
+      border-collapse: collapse;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      overflow: hidden;
+      min-width: 220px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    table th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interpolación Lineal</h1>
+
+  <label>Valores de <strong>x</strong> (separados por comas):</label>
+  <textarea id="valoresX" placeholder="Ejemplo: 1, 2"></textarea><br>
+
+  <label>Valores de <strong>f(x)</strong> (separados por comas):</label>
+  <textarea id="valoresFX" placeholder="Ejemplo: 3, 5"></textarea><br>
+
+  <label>Valor de <strong>x</strong> a interpolar:</label>
+  <input type="number" id="xInterpola" placeholder="Ejemplo: 1.5"><br>
+
+  <button id="calcular">Calcular Interpolación</button>
+
+  <div id="resultado"></div>
+
+  <div class="grafico-con-tabla">
+    <canvas id="grafica" width="700" height="600"></canvas>
+  
+    <table id="tablaValores">
+      <thead>
+        <tr>
+          <th>x</th>
+          <th>f(x)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td id="x0">-</td><td id="fx0">-</td></tr>
+        <tr><td id="x1">-</td><td id="fx1">-</td></tr>
+        <tr><td id="xInterp">-</td><td id="fxInterp">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
