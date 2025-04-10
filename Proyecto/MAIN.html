@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Interpolación Numérica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .method-card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Métodos de Interpolación Numérica</h1>
+        
+        <div class="method-card">
+            <h2>Interpolación de Lagrange</h2>
+            <p>Método que encuentra un polinomio único que pasa exactamente por un conjunto de puntos dados.</p>
+            <a href="Lagrange(o).html" class="btn">Ir al Programa</a>
+        </div>
+        
+        <div class="method-card">
+            <h2>Interpolación de Newton</h2>
+            <p>Utiliza diferencias divididas para construir un polinomio interpolante de forma eficiente.</p>
+            <a href="NewtonH.html" class="btn">Ir al Programa</a>
+        </div>
+        
+        <div class="method-card">
+            <h2>Interpolación Cuadrática</h2>
+            <p>Aproxima datos usando polinomios de segundo grado para segmentos específicos.</p>
+            <a href="Interpolacion Cuadrada.html" class="btn">Ir al Programa</a>
+        </div>
+        
+        <div class="method-card">
+            <h2>Interpolación Lineal</h2>
+            <p>Conecta puntos adyacentes con líneas rectas, el método más simple de interpolación.</p>
+            <a href="Interpolacion lineal.html" class="btn">Ir al Programa</a>
+        </div>
+        
+        <div class="method-card">
+            <h2>Mínimos Cuadrados</h2>
+            <p>Encuentra la curva que mejor se ajuste a los datos, minimizando la suma de los residuos al cuadrado.</p>
+            <a href="minimos_cuadrados.html" class="btn">Ir al Programa</a>
+        </div>
+        
+        <footer>
+            <p>Derechos reservados por PapuCorp</p>
+        </footer>
+    </div>
+</body>
+</html>

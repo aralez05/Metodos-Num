@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Interpolación Cuadrática (Newton)</title>
+  <link rel="stylesheet" href="cuadratica.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="Interpolacion.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <a href="MAIN.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Regresar
+    </a>
+  <div class="container">
+    <h1>Interpolación Cuadrática (Newton)</h1>
+    
+    <div class="input-section">
+      <div class="input-row">
+        <div class="input-group">
+          <label for="x0">x₀:</label>
+          <input type="number" id="x0" step="any" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="fx0">f(x₀):</label>
+          <input type="number" id="fx0" step="any" class="input-field">
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <div class="input-group">
+          <label for="x1">x₁:</label>
+          <input type="number" id="x1" step="any" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="fx1">f(x₁):</label>
+          <input type="number" id="fx1" step="any" class="input-field">
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <div class="input-group">
+          <label for="x2">x₂:</label>
+          <input type="number" id="x2" step="any" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="fx2">f(x₂):</label>
+          <input type="number" id="fx2" step="any" class="input-field">
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <div class="input-group full-width">
+          <label for="x">x a interpolar:</label>
+          <input type="number" id="x" step="any" class="input-field">
+        </div>
+      </div>
+      
+      <button id="interpolar" class="btn-primary">Calcular Interpolación</button>
+    </div>
+    
+    <div id="resultado" class="result-box"></div>
+    
+    <div class="graph-section">
+      <div class="chart-container">
+        <canvas id="grafica"></canvas>
+      </div>
+      
+      <div class="table-container">
+        <table id="tablaValores">
+          <thead>
+            <tr>
+              <th>Punto</th>
+              <th>x</th>
+              <th>f(x)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Punto 0</td><td id="celdaX0">-</td><td id="celdaFx0">-</td></tr>
+            <tr><td>Punto 1</td><td id="celdaX1">-</td><td id="celdaFx1">-</td></tr>
+            <tr><td>Punto 2</td><td id="celdaX2">-</td><td id="celdaFx2">-</td></tr>
+            <tr><td>Interpolado</td><td id="celdaXInterp">-</td><td id="celdaFxInterp">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
