@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Interpolación Cuadrática (Newton)</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="Interpolacion.js"></script>
+
+    
+</head>
+<body>
+
+  <h2>Interpolación Cuadrática (Newton)</h2>
+
+  <div>
+    <label>x₀: <input type="number" id="x0" step="any"></label>
+    <label>f(x₀): <input type="number" id="fx0" step="any"></label>
+  </div>
+  
+  <div class="input-group">
+    <label>x₁: <input type="number" id="x1" step="any"></label>
+    <label>f(x₁): <input type="number" id="fx1" step="any"></label>
+  </div>
+  
+  <div>
+    <label>x₂: <input type="number" id="x2" step="any"></label>
+    <label>f(x₂): <input type="number" id="fx2" step="any"></label>
+  </div>
+  
+  <div>
+    <label>x a interpolar: <input type="number" id="x" step="any"></label>
+  </div>
+
+  <button id="interpolar">Interpolar</button>
+
+  <div id="resultado"></div>
+
+  <canvas id="grafica" width="800" height="500"></canvas>
+
+  <div>
+    <table id="tablaValores">
+      <thead>
+        <tr>
+          <th>Punto</th>
+          <th>x</th>
+          <th>f(x)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Punto 0</td><td id="celdaX0">-</td><td id="celdaFx0">-</td></tr>
+        <tr><td>Punto 1</td><td id="celdaX1">-</td><td id="celdaFx1">-</td></tr>
+        <tr><td>Punto 2</td><td id="celdaX2">-</td><td id="celdaFx2">-</td></tr>
+        <tr><td>Interpolado</td><td id="celdaXInterp">-</td><td id="celdaFxInterp">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
